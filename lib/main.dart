@@ -26,6 +26,7 @@ class Formulario extends StatelessWidget {
             // Inputs
             TextField(
                 controller: _controladorNome,
+                decoration: const InputDecoration( labelText: "Nome"),
               ),
 
             Padding(
@@ -33,6 +34,8 @@ class Formulario extends StatelessWidget {
               child: // Texto
               TextField(
                 controller: _controladorQuantidade,
+                decoration: const InputDecoration( labelText: "Quantidade"),
+                keyboardType: TextInputType.number,
               ),
             ),
 
@@ -41,6 +44,8 @@ class Formulario extends StatelessWidget {
               child: // Texto
               TextField(
                 controller: _controladorValor,
+                decoration: const InputDecoration( labelText: "Valor" ),
+                keyboardType: TextInputType.number,
               ),
             ),
 
