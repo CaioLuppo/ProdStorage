@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import './models/produto.dart';
 
-
 void main() => runApp(Formulario());
 
 class Formulario extends StatelessWidget {
@@ -17,21 +16,39 @@ class Formulario extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-
         appBar: AppBar(
           title: const Text("Cadastrando produto"),
         ),
-
-        body: Column(
-          children: <Widget>[
+        body: Padding(  // Adiciona espaçamento
+          padding: const EdgeInsets.all(24.0),
+          child: Column(children: <Widget>[
 
             // Inputs
-            TextField( controller: _controladorNome,),
-            TextField( controller: _controladorQuantidade,),
-            TextField( controller: _controladorValor,),
+            TextField(
+                controller: _controladorNome,
+              ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: // Texto
+              TextField(
+                controller: _controladorQuantidade,
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: // Texto
+              TextField(
+                controller: _controladorValor,
+              ),
+            ),
 
             // Botão de Cadastrar
-            ElevatedButton(
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: // Botão
+              ElevatedButton(
                 onPressed: () {
                   final nome = _controladorNome.text;
                   final quantidade = int.tryParse(_controladorQuantidade.text);
@@ -40,15 +57,11 @@ class Formulario extends StatelessWidget {
                   final Produto novoProduto = Produto(nome, quantidade, valor);
                 },
                 child: const Text("Cadastrar"),
+              ),
             ),
-
-          ]
-
+          ]),
         ),
-
       ),
     );
   }
 }
-
-
