@@ -20,8 +20,7 @@ class _FormularioState extends State<Formulario>{
   // Widget
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text("Cadastrando produto"),
         ),
@@ -66,7 +65,6 @@ class _FormularioState extends State<Formulario>{
             ),
           ]),
         ),
-      ),
     );
   }
 

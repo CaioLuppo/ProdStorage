@@ -13,11 +13,16 @@ class ListaProdutos extends StatefulWidget {
 class _ListaProdutosState extends State<ListaProdutos> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
 
-        appBar: AppBar(
-          title: const Text("Produtos"),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(70.0),
+          child: AppBar(
+            title: const Padding(
+              padding: EdgeInsets.only(top: 12.0),
+              child: Text("Produtos", style: TextStyle(fontSize: 32)),
+            ),
+          ),
         ),
 
         body: ListView.builder(
@@ -37,7 +42,6 @@ class _ListaProdutosState extends State<ListaProdutos> {
             })).then((produtoCriado) => _atualizaLista(produtoCriado));
           },
         ),
-      ),
     );
   }
 
@@ -63,12 +67,21 @@ class ItemProduto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        title: Text("Produto: ${_produto.nome}"),
-        subtitle: Text(
-            "Qtd: ${_produto.quantidade.toString()} | Valor: ${_produto.valor.toString()}"),
-      ),
+    return Padding(
+        padding: const EdgeInsets.only(top: 4.0),
+        child: Card(
+          child: ListTile(
+            title: Padding(
+                padding: const EdgeInsets.only(bottom: 8, top: 8),
+                child: Text(_produto.nome.toString(), style: const TextStyle(fontSize: 24))
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                  "Qtd: ${_produto.quantidade.toString()} | Valor: ${_produto.valor.toString()}"),
+            ),
+          ),
+        ),
     );
   }
 }
