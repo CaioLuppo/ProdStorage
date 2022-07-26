@@ -12,9 +12,4 @@ class Produto {
       this.quantidade,
       this.valor,
       );
-
-  @override  // Reescreve o método toString na classe
-  String toString() {
-    return 'Produto{nome: $nome, quantidade: $quantidade, valor: $valor}';
-  }
 }

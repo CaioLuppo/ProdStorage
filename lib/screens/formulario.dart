@@ -77,6 +77,7 @@ class _FormularioState extends State<Formulario>{
 
     if (nome != '' && quantidade != null && valor != null) {
       final Produto novoProduto = Produto(nome, quantidade, valor);
+      Navigator.pop(context, novoProduto);
     }
     
   }
