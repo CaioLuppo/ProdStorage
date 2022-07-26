@@ -1,16 +1,11 @@
-# formulario
+# ProductForm
 
-A new Flutter project.
+O ProductForm é um simples inventário de produtos feito em Flutter, onde o usuário pode adicionar um produto com nome, quantidade e valor!
 
-## Getting Started
+## Mudanças
 
-This project is a starting point for a Flutter application.
+A partir do <a href='https://www.alura.com.br/artigos/criando-formulario-com-flutter'>artigo</a> publicado pela Alura, fiz a criação de um <a href='https://github.com/CaioLuppo/InventariodeProdutos/releases/tag/FimDoArtigo'>app simples</a> onde apenas existiam inputs e o botão de confirmar.
 
-A few resources to get you started if this is your first Flutter project:
+Porém, com meus conhecimentos, realizei a implementação de uma lista de produtos que mostra todos os itens cadastrados pelo usuário naquele momento. 😊
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Ainda é um projeto simples, porém estou em constante aprendizado!
