@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:formulario/main.dart';
+import 'package:formulario/screens/formulario.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
