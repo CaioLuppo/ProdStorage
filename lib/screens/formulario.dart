@@ -51,9 +51,12 @@ class _FormularioState extends State<Formulario>{
 
               Column(
                 children: [
-                  const Text(
-                    "Imagem do Produto:",
-                    style: TextStyle(fontSize: 16),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 8.0),
+                    child: Text(
+                      "Imagem do Produto:",
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16.0),
