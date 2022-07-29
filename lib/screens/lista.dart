@@ -60,7 +60,7 @@ class _ListaProdutosState extends State<ListaProdutos> {
                 return const Text("Erro desconhecido");
 
             }
-          }
+          },
         ),
 
         floatingActionButton: FloatingActionButton(
