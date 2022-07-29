@@ -6,7 +6,7 @@ import 'package:formulario/models/produto.dart';
 import 'package:sqflite/sqflite.dart';
 
 
-class Contact {
+class ProductDao {
   // Classe que guardará as funções de comunicação com o banco
 
   // Variáveis para o app_database.dart

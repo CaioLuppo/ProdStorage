@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formulario/database/dao/product_dao.dart';
 
 import 'formulario.dart';
 import 'package:formulario/models/produto.dart';
@@ -11,6 +12,8 @@ class ListaProdutos extends StatefulWidget {
 }
 
 class _ListaProdutosState extends State<ListaProdutos> {
+  final ProductDao _dao = ProductDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +28,40 @@ class _ListaProdutosState extends State<ListaProdutos> {
           ),
         ),
 
-        body: ListView.builder(
-            itemCount: widget._produtos.length,
-            itemBuilder: (context, indx) {
-              final produto = widget._produtos[indx];
-              return ItemProduto(produto);
-            }),
+        body: FutureBuilder<List<Produto>>(
+          future: _dao.todosProdutos(),
+          builder: (context, snapshot) {
+
+            switch(snapshot.connectionState){
+
+              case ConnectionState.waiting:
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(),
+                      Text("Carregando produtos...")
+                    ],
+                  ),
+                );
+
+              case ConnectionState.done:
+                return ListView.builder(
+                    itemCount: widget._produtos.length,
+                    itemBuilder: (context, indx) {
+                      final produto = widget._produtos[indx];
+                      return ItemProduto(produto);
+                    });
+
+              case ConnectionState.none:
+                return const Text("Erro desconhecido");
+              case ConnectionState.active:
+                return const Text("Erro desconhecido");
+
+            }
+          }
+        ),
 
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
@@ -60,6 +91,7 @@ class _ListaProdutosState extends State<ListaProdutos> {
 
 
 class ItemProduto extends StatelessWidget {
+
   // Guarda o padrão para o item
   final Produto _produto;
 

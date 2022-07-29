@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 // DAO
-import './dao/contact_dao.dart';
+import './dao/product_dao.dart';
 
 
 Future<Database> getDB() async {
@@ -19,7 +19,7 @@ Future<Database> getDB() async {
         inventario,  // Banco
         version,  // Versão
         ) {
-      inventario.execute(Contact.createTable);
+      inventario.execute(ProductDao.createTable);
     },
 
     version: 1,  // Versão do banco que está utilizando
