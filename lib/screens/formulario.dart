@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 import '../models/produto.dart';
 
@@ -11,6 +13,20 @@ class Formulario extends StatefulWidget {
 
 
 class _FormularioState extends State<Formulario>{
+
+  // Imagem
+  File? _imagem;
+
+  Future _pegaImagem() async {
+    final imagem = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (imagem == null) return "Imagem não selecionada";
+
+    final localTemporario = File(imagem.path);
+
+    setState(() {
+      _imagem = localTemporario;
+    });
+  }
 
   // Controladores que receberam o valor do input
   final TextEditingController _controladorNome = TextEditingController();
@@ -28,6 +44,48 @@ class _FormularioState extends State<Formulario>{
           child: Padding(  // Adiciona espaçamento
             padding: const EdgeInsets.all(24.0),
             child: Column(children: <Widget>[
+
+              Column(
+                children: [
+                  const Text(
+                    "Imagem do Produto:",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      height: 300,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child:
+                          _imagem != null
+                              ? Image.file(_imagem!, fit: BoxFit.fill,)
+                              : ElevatedButton(
+                              onPressed: _pegaImagem,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.image_search, size: 40,),
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 10.0),
+                                    child: Text("Pegar imagem da galeria",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),),
+                                  ),
+                                ],
+                              ),
+                          ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
 
               // Inputs
               TextField(
