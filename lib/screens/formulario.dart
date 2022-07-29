@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -15,16 +18,17 @@ class Formulario extends StatefulWidget {
 class _FormularioState extends State<Formulario>{
 
   // Imagem
-  File? _imagem;
+  String _imagem64 = '';
 
   Future _pegaImagem() async {
     final imagem = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (imagem == null) return "Imagem não selecionada";
 
     final localTemporario = File(imagem.path);
+    final Uint8List imagemBytes = await localTemporario.readAsBytes();
 
     setState(() {
-      _imagem = localTemporario;
+      _imagem64 = base64Encode(imagemBytes);
     });
   }
 
@@ -62,25 +66,9 @@ class _FormularioState extends State<Formulario>{
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child:
-                          _imagem != null
-                              ? Image.file(_imagem!, fit: BoxFit.fill,)
-                              : ElevatedButton(
-                              onPressed: _pegaImagem,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.image_search, size: 40,),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 10.0),
-                                    child: Text("Pegar imagem da galeria",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),),
-                                  ),
-                                ],
-                              ),
-                          ),
+                          _imagem64 != ''
+                              ? _decodificaImagem(_imagem64)
+                              : _botaoPegaImagem()
                       ),
                     ),
                   ),
@@ -115,11 +103,13 @@ class _FormularioState extends State<Formulario>{
 
               // Botão de Cadastrar
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: // Botão
                 ElevatedButton(
                   onPressed: () => _criaProduto(context),
-                  child: const Text("Cadastrar"),
+                  child: const Text("Cadastrar",
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ),
               ),
             ]),
@@ -132,12 +122,42 @@ class _FormularioState extends State<Formulario>{
     final nome = _controladorNome.text;
     final quantidade = int.tryParse(_controladorQuantidade.text);
     final valor = double.tryParse(_controladorValor.text);
-    const imagem = ''; // Temporário, até implementar image picker
+    final imagem = _imagem64;
 
-    if (nome != '' && quantidade != null && valor != null) {
+    if (nome != '' && quantidade != null && valor != null && imagem != '') {
       final Produto novoProduto = Produto(nome, quantidade, valor, imagem);
       Navigator.pop(context, novoProduto);
     }
-    
   }
+
+  // String _imageToBase64(File arquivoImagem){
+  //   Image.file(_imagem!).toString();
+  // }
+
+  Widget _botaoPegaImagem(){
+    return ElevatedButton(
+      onPressed: _pegaImagem,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          Icon(Icons.image_search, size: 40,),
+          Padding(
+            padding: EdgeInsets.only(top: 10.0),
+            child: Text("Pegar imagem da galeria",
+              style: TextStyle(
+                fontSize: 16,
+              ),),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Image _decodificaImagem(String imagemCodificada){
+    final decodificada = base64Decode(imagemCodificada);
+    return Image.memory(decodificada);
+  }
+  
+
 }
