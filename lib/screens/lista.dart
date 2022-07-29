@@ -1,8 +1,11 @@
+// Dependências
 import 'package:flutter/material.dart';
 import 'package:formulario/database/dao/product_dao.dart';
 
+// Criados
 import 'formulario.dart';
 import 'package:formulario/models/produto.dart';
+
 
 class ListaProdutos extends StatefulWidget {
   final List<Produto> _produtos = [];
@@ -86,9 +89,7 @@ class _ListaProdutosState extends State<ListaProdutos> {
       });
     }
   }
-
 }
-
 
 class ItemProduto extends StatelessWidget {
 
