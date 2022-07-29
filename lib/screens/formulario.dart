@@ -24,46 +24,48 @@ class _FormularioState extends State<Formulario>{
         appBar: AppBar(
           title: const Text("Cadastrando produto"),
         ),
-        body: Padding(  // Adiciona espaçamento
-          padding: const EdgeInsets.all(24.0),
-          child: Column(children: <Widget>[
+        body: SingleChildScrollView(
+          child: Padding(  // Adiciona espaçamento
+            padding: const EdgeInsets.all(24.0),
+            child: Column(children: <Widget>[
 
-            // Inputs
-            TextField(
-              controller: _controladorNome,
-              decoration: const InputDecoration( labelText: "Nome"),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: // Texto
+              // Inputs
               TextField(
-                controller: _controladorQuantidade,
-                decoration: const InputDecoration( labelText: "Quantidade"),
-                keyboardType: TextInputType.number,
+                controller: _controladorNome,
+                decoration: const InputDecoration( labelText: "Nome"),
               ),
-            ),
 
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: // Texto
-              TextField(
-                controller: _controladorValor,
-                decoration: const InputDecoration( labelText: "Valor" ),
-                keyboardType: TextInputType.number,
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: // Texto
+                TextField(
+                  controller: _controladorQuantidade,
+                  decoration: const InputDecoration( labelText: "Quantidade"),
+                  keyboardType: TextInputType.number,
+                ),
               ),
-            ),
 
-            // Botão de Cadastrar
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: // Botão
-              ElevatedButton(
-                onPressed: () => _criaProduto(context),
-                child: const Text("Cadastrar"),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: // Texto
+                TextField(
+                  controller: _controladorValor,
+                  decoration: const InputDecoration( labelText: "Valor" ),
+                  keyboardType: TextInputType.number,
+                ),
               ),
-            ),
-          ]),
+
+              // Botão de Cadastrar
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: // Botão
+                ElevatedButton(
+                  onPressed: () => _criaProduto(context),
+                  child: const Text("Cadastrar"),
+                ),
+              ),
+            ]),
+          ),
         ),
     );
   }
@@ -72,9 +74,10 @@ class _FormularioState extends State<Formulario>{
     final nome = _controladorNome.text;
     final quantidade = int.tryParse(_controladorQuantidade.text);
     final valor = double.tryParse(_controladorValor.text);
+    const imagem = ''; // Temporário, até implementar image picker
 
     if (nome != '' && quantidade != null && valor != null) {
-      final Produto novoProduto = Produto(nome, quantidade, valor);
+      final Produto novoProduto = Produto(nome, quantidade, valor, imagem);
       Navigator.pop(context, novoProduto);
     }
     
