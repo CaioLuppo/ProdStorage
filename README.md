@@ -17,3 +17,4 @@ Ainda é um projeto simples, porém estou em constante aprendizado!
 - [x] Integração com SQLite (sqflite)
 - [x] Ícone adicionado
 - [x] Nome do aplicativo alterado para "ProdStorage"
+- [x] Tema claro e escuro
