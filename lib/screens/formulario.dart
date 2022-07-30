@@ -70,7 +70,7 @@ class _FormularioState extends State<Formulario>{
                         borderRadius: BorderRadius.circular(16),
                         child:
                           _imagem64 != ''
-                              ? _decodificaImagem(_imagem64)
+                              ? decodificaImagem(_imagem64)
                               : _botaoPegaImagem()
                       ),
                     ),
@@ -128,7 +128,7 @@ class _FormularioState extends State<Formulario>{
     final imagem = _imagem64;
 
     if (nome != '' && quantidade != null && valor != null && imagem != '') {
-      final Produto novoProduto = Produto(nome, quantidade, valor, imagem);
+      final Produto novoProduto = Produto(nome, quantidade, valor, Image.asset("lib/assets/samples/ipad.png"));
       Navigator.pop(context, novoProduto);
     }
   }
@@ -157,7 +157,7 @@ class _FormularioState extends State<Formulario>{
     );
   }
 
-  Image _decodificaImagem(String imagemCodificada){
+  Image decodificaImagem(String imagemCodificada){
     final decodificada = base64Decode(imagemCodificada);
     return Image.memory(decodificada);
   }

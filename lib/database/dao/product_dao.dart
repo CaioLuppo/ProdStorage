@@ -40,23 +40,6 @@ class ProductDao {
 
   }
 
-  Map<String, dynamic> _toMap(Produto produto) {
-    // Essa função converte o produto em mapa
-
-    // criação do mapa que será preenchido ao longo da função
-    final Map<String, dynamic> mapaProduto = {};
-
-    // Não acrescenta o código pois se auto-incrementa
-    mapaProduto['nome'] = produto.nome;
-    mapaProduto['valor'] = produto.valor;
-    mapaProduto['qtd'] = produto.quantidade;
-    mapaProduto['imagem'] = produto.imagem;
-
-    // Retorna o mapa
-    return mapaProduto;
-
-  }
-
   Future<List<Produto>> todosProdutos() async {
 
     final Database db = await getDB();
@@ -66,6 +49,9 @@ class ProductDao {
 
     return produtos;
   }
+
+
+  // Helpers
 
   List<Produto> _toList(List<Map<String, dynamic>> resultado) {
     // Converte o resultado da query SQL para uma Lista contendo produtos
@@ -81,6 +67,23 @@ class ProductDao {
       ));
     }
     return produtos;
+  }
+
+  Map<String, dynamic> _toMap(Produto produto) {
+    // Essa função converte o produto em mapa
+
+    // criação do mapa que será preenchido ao longo da função
+    final Map<String, dynamic> mapaProduto = {};
+
+    // Não acrescenta o código pois se auto-incrementa
+    mapaProduto['nome'] = produto.nome;
+    mapaProduto['valor'] = produto.valor;
+    mapaProduto['qtd'] = produto.quantidade;
+    mapaProduto['imagem'] = produto.imagem;
+
+    // Retorna o mapa
+    return mapaProduto;
+
   }
 
 }

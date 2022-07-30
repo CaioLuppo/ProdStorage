@@ -1,11 +1,13 @@
 // Modelo para o produto
 
+import 'package:flutter/cupertino.dart';
+
 class Produto {
   // Variáveis
   final String nome;
   final int? quantidade;
   final double? valor;
-  final String imagem;
+  final Image imagem;
 
   // Construtor
   Produto(
