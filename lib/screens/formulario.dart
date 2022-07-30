@@ -128,7 +128,7 @@ class _FormularioState extends State<Formulario>{
     final imagem = _imagem64;
 
     if (nome != '' && quantidade != null && valor != null && imagem != '') {
-      final Produto novoProduto = Produto(nome, quantidade, valor, Image.asset("lib/assets/samples/ipad.png"));
+      final Produto novoProduto = Produto(nome, quantidade, valor, imagem);
       Navigator.pop(context, novoProduto);
     }
   }
@@ -157,10 +157,9 @@ class _FormularioState extends State<Formulario>{
     );
   }
 
-  Image decodificaImagem(String imagemCodificada){
-    final decodificada = base64Decode(imagemCodificada);
-    return Image.memory(decodificada);
-  }
-  
+}
 
+Image decodificaImagem(String imagemCodificada){
+  final decodificada = base64Decode(imagemCodificada);
+  return Image.memory(decodificada);
 }

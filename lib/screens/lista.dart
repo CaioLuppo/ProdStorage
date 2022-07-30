@@ -8,10 +8,6 @@ import 'package:formulario/models/produto.dart';
 
 
 class ListaProdutos extends StatefulWidget {
-  final List<Produto> _produtos = [
-    Produto("nome", 20, 1000, Image.asset('lib/assets/samples/ipad.png'))
-  ];
-
   @override
   State<ListaProdutos> createState() => _ListaProdutosState();
 }
@@ -52,12 +48,19 @@ class _ListaProdutosState extends State<ListaProdutos> {
                 );
 
               case ConnectionState.done:
-                return ListView.builder(
-                    itemCount: widget._produtos.length,
-                    itemBuilder: (context, indx) {
-                      final produto = widget._produtos[indx];
-                      return ItemProduto(produto);
-                    });
+                final List<Produto> produtos = snapshot.data!;
+                if (produtos.isNotEmpty) {
+                  return ListView.builder(
+                      itemCount: produtos.length,
+                      itemBuilder: (context, indx) {
+                        final produto = produtos[indx];
+                        return ItemProduto(produto);
+                      });
+                } else {
+                  return const Center(
+                    child: Text("Nenhum produto no inventário."),
+                  );
+                }
 
               case ConnectionState.none:
                 return const Text("Erro desconhecido");
@@ -75,21 +78,10 @@ class _ListaProdutosState extends State<ListaProdutos> {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Formulario();
               // Aqui o "produtoCriado" será o valor passado no "pop" do form
-            })).then((produtoCriado) => _atualizaLista(produtoCriado));
+            })).then((value) => setState((){}));
           },
         ),
     );
-  }
-
-  // Função para atualizar a lista principal
-  void _atualizaLista(Produto? produtoCriado){
-    if(produtoCriado != null){
-      setState(() {
-        // O setState vai chamar novamente a build da lista, só que dessa vez
-        // com a lista atualizada pelo comando abaixo.
-        widget._produtos.add(produtoCriado);
-      });
-    }
   }
 }
 
@@ -121,7 +113,7 @@ class ItemProduto extends StatelessWidget {
                 child: SizedBox(
                     height: 120,
                     width: 120,
-                    child: _produto.imagem
+                    child: decodificaImagem(_produto.imagem)
                 ),
               ),
               Padding(
