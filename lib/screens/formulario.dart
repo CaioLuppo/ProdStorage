@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:formulario/database/dao/product_dao.dart';
+import 'package:prod_storage/database/dao/product_dao.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';

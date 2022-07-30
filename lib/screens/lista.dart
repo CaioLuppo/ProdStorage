@@ -1,10 +1,10 @@
 // Dependências
 import 'package:flutter/material.dart';
-import 'package:formulario/database/dao/product_dao.dart';
+import 'package:prod_storage/database/dao/product_dao.dart';
 
 // Criados
 import 'formulario.dart';
-import 'package:formulario/models/produto.dart';
+import 'package:prod_storage/models/produto.dart';
 
 
 class ListaProdutos extends StatefulWidget {
