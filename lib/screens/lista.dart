@@ -109,11 +109,14 @@ class ItemProduto extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: SizedBox(
                     height: 120,
                     width: 120,
-                    child: decodificaImagem(_produto.imagem)
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: decodificaImagem(_produto.imagem),
+                    ),
                 ),
               ),
               Padding(
