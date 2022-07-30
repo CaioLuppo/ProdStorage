@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:formulario/database/dao/product_dao.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sqflite/sqflite.dart';
 import 'dart:io';
 
 import '../models/produto.dart';
@@ -16,6 +18,9 @@ class Formulario extends StatefulWidget {
 
 
 class _FormularioState extends State<Formulario>{
+
+  // DAO
+  final _dao = ProductDao();
 
   // Imagem
   String _imagem64 = '';
@@ -129,7 +134,8 @@ class _FormularioState extends State<Formulario>{
 
     if (nome != '' && quantidade != null && valor != null && imagem != '') {
       final Produto novoProduto = Produto(nome, quantidade, valor, imagem);
-      Navigator.pop(context, novoProduto);
+
+      _dao.salvarProduto(novoProduto).then((value) => Navigator.pop(context));
     }
   }
 
