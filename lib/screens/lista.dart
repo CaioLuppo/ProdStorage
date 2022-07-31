@@ -54,12 +54,15 @@ class _ListaProdutosState extends State<ListaProdutos> {
               case ConnectionState.done:
                 final List<Produto>? produtos = snapshot.data;
                 if (produtos != null && produtos.isNotEmpty) {
-                  return ListView.builder(
-                      itemCount: produtos.length,
-                      itemBuilder: (context, indx) {
-                        final produto = produtos[indx];
-                        return ItemProduto(produto);
-                      });
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                    child: ListView.builder(
+                        itemCount: produtos.length,
+                        itemBuilder: (context, indx) {
+                          final produto = produtos[indx];
+                          return ItemProduto(produto);
+                        }),
+                  );
                 } else {
                   return Center(
                     child: Padding(
@@ -109,7 +112,7 @@ class ItemProduto extends StatelessWidget {
     final valor = _produto.valor?.toStringAsFixed(2);
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 16.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
