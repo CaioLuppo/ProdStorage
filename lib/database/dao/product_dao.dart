@@ -59,7 +59,6 @@ class ProductDao {
 
     final List<Produto> produtos = [];
 
-    // getImage('1');
     for (Map<String, dynamic> linha in resultado){
 
       final Database db = await getDB();
@@ -67,7 +66,6 @@ class ProductDao {
       Uint8List imagem = Uint8List.fromList([]);
 
       for(Map<String, dynamic> row in query){
-        print(row);
         imagem = row[_imagemBytes];
       }
 

@@ -43,7 +43,10 @@ class _ListaProdutosState extends State<ListaProdutos> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
                       CircularProgressIndicator(),
-                      Text("Carregando produtos...")
+                      Padding(
+                        padding: EdgeInsets.only(top: 16.0),
+                        child: Text("Carregando produtos..."),
+                      )
                     ],
                   ),
                 );
@@ -58,8 +61,14 @@ class _ListaProdutosState extends State<ListaProdutos> {
                         return ItemProduto(produto);
                       });
                 } else {
-                  return const Center(
-                    child: Text("Nenhum produto no inventário."),
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 72.0),
+                      child: Text(
+                          "Nenhum produto no inventário.",
+                          style: TextStyle(color: Theme.of(context).disabledColor),
+                      ),
+                    )
                   );
                 }
 
