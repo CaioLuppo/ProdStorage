@@ -1,10 +1,10 @@
 // Dependências
 import 'package:flutter/material.dart';
-import 'package:prod_storage/database/dao/product_dao.dart';
+import '../database/dao/product_dao.dart';
 
 // Criados
 import 'formulario.dart';
-import 'package:prod_storage/models/produto.dart';
+import '../models/produto.dart';
 
 
 class ListaProdutos extends StatefulWidget {
@@ -30,6 +30,7 @@ class _ListaProdutosState extends State<ListaProdutos> {
         ),
 
         body: FutureBuilder<List<Produto>>(
+          initialData: const [],
           future: _dao.todosProdutos(),
           builder: (context, snapshot) {
 
@@ -48,8 +49,8 @@ class _ListaProdutosState extends State<ListaProdutos> {
                 );
 
               case ConnectionState.done:
-                final List<Produto> produtos = snapshot.data!;
-                if (produtos.isNotEmpty) {
+                final List<Produto>? produtos = snapshot.data;
+                if (produtos != null && produtos.isNotEmpty) {
                   return ListView.builder(
                       itemCount: produtos.length,
                       itemBuilder: (context, indx) {
@@ -115,7 +116,7 @@ class ItemProduto extends StatelessWidget {
                     width: 120,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: decodificaImagem(_produto.imagem),
+                        child: Image.memory(_produto.imagem),
                     ),
                 ),
               ),

@@ -1,4 +1,3 @@
-// SQFlite
 // Database
 import 'package:prod_storage/database/app_database.dart';
 // Models
@@ -16,13 +15,13 @@ class ProductDao {
       '$_nomeProduto TEXT,'
       '$_valorProduto REAL,'
       '$_qtd INTEGER,'
-      '$_imagemProdutoBase64 TEXT)';
+      '$_imagemBytes BLOB)';
 
   static const String _tabela = 'produtos';
   static const String _primary = 'codigo';
   static const String _nomeProduto = 'nome';
   static const String _valorProduto = 'valor';
-  static const String _imagemProdutoBase64 = 'imagem';
+  static const String _imagemBytes = 'imagem';
   static const String _qtd = 'qtd';
 
   // Funções
@@ -63,7 +62,7 @@ class ProductDao {
           linha[_nomeProduto],
           linha[_qtd],
           linha[_valorProduto],
-          linha[_imagemProdutoBase64]
+          linha[_imagemBytes]
       ));
     }
     return produtos;

@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:prod_storage/database/dao/product_dao.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sqflite/sqflite.dart';
 import 'dart:io';
 
 import '../models/produto.dart';
@@ -23,7 +21,7 @@ class _FormularioState extends State<Formulario>{
   final _dao = ProductDao();
 
   // Imagem
-  String _imagem64 = '';
+  Uint8List _imagemBytes = Uint8List.fromList([]);
 
   Future _pegaImagem() async {
     final imagem = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -33,7 +31,7 @@ class _FormularioState extends State<Formulario>{
     final Uint8List imagemBytes = await localTemporario.readAsBytes();
 
     setState(() {
-      _imagem64 = base64Encode(imagemBytes);
+      _imagemBytes = imagemBytes;
     });
   }
 
@@ -74,8 +72,8 @@ class _FormularioState extends State<Formulario>{
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child:
-                          _imagem64 != ''
-                              ? decodificaImagem(_imagem64)
+                          _imagemBytes.isNotEmpty
+                              ? Image.memory(_imagemBytes)
                               : _botaoPegaImagem()
                       ),
                     ),
@@ -130,9 +128,9 @@ class _FormularioState extends State<Formulario>{
     final nome = _controladorNome.text;
     final quantidade = int.tryParse(_controladorQuantidade.text);
     final valor = double.tryParse(_controladorValor.text);
-    final imagem = _imagem64;
+    final imagem = _imagemBytes;
 
-    if (nome != '' && quantidade != null && valor != null && imagem != '') {
+    if (nome != '' && quantidade != null && valor != null && imagem.isNotEmpty) {
       final Produto novoProduto = Produto(nome, quantidade, valor, imagem);
 
       _dao.salvarProduto(novoProduto).then((value) => Navigator.pop(context));
@@ -163,9 +161,4 @@ class _FormularioState extends State<Formulario>{
     );
   }
 
-}
-
-Image decodificaImagem(String imagemCodificada){
-  final decodificada = base64Decode(imagemCodificada);
-  return Image.memory(decodificada);
 }
