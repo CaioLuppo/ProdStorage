@@ -23,5 +23,6 @@ Future<Database> getDB() async {
     },
 
     version: 1,  // Versão do banco que está utilizando
+    // onDowngrade: onDatabaseDowngradeDelete
   );
 }

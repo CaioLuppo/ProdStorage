@@ -1,4 +1,6 @@
 // Database
+import 'dart:typed_data';
+
 import 'package:prod_storage/database/app_database.dart';
 // Models
 import 'package:prod_storage/models/produto.dart';
@@ -42,9 +44,9 @@ class ProductDao {
   Future<List<Produto>> todosProdutos() async {
 
     final Database db = await getDB();
-    final List<Map<String, dynamic>> resultado = await db.query(_tabela);
+    final List<Map<String, dynamic>> resultado = await db.rawQuery('SELECT * FROM $_tabela');
 
-    List<Produto> produtos = _toList(resultado);
+    Future<List<Produto>> produtos = _toList(resultado);
 
     return produtos;
   }
@@ -52,17 +54,28 @@ class ProductDao {
 
   // Helpers
 
-  List<Produto> _toList(List<Map<String, dynamic>> resultado) {
+  Future<List<Produto>> _toList(List<Map<String, dynamic>> resultado) async {
     // Converte o resultado da query SQL para uma Lista contendo produtos
 
     final List<Produto> produtos = [];
 
+    // getImage('1');
     for (Map<String, dynamic> linha in resultado){
+
+      final Database db = await getDB();
+      final query = await db.rawQuery("SELECT $_imagemBytes FROM $_tabela WHERE $_primary = ${linha[_primary]}");
+      Uint8List imagem = Uint8List.fromList([]);
+
+      for(Map<String, dynamic> row in query){
+        print(row);
+        imagem = row[_imagemBytes];
+      }
+
       produtos.add(Produto(
           linha[_nomeProduto],
           linha[_qtd],
           linha[_valorProduto],
-          linha[_imagemBytes]
+          imagem
       ));
     }
     return produtos;

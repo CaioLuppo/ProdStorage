@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:prod_storage/database/dao/product_dao.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -27,8 +28,8 @@ class _FormularioState extends State<Formulario>{
     final imagem = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (imagem == null) return "Imagem não selecionada";
 
-    final localTemporario = File(imagem.path);
-    final Uint8List imagemBytes = await localTemporario.readAsBytes();
+    final imagemComprimida = await FlutterNativeImage.compressImage(imagem.path, quality: 15);
+    final Uint8List imagemBytes = await imagemComprimida.readAsBytes();
 
     setState(() {
       _imagemBytes = imagemBytes;
