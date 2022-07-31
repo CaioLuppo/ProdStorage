@@ -10,7 +10,7 @@ Porém, com meus conhecimentos, realizei a implementação de uma lista de produ
 
 Ainda é um projeto simples, porém estou em constante aprendizado!
 
-## Última atualização (v1.1.0) 🎉
+## Última atualização (v1.1.0+1) 🎉
 
 - [x] Produto agora pode ser registrado com imagem
 - [x] Sistema de persistência adicionado
@@ -18,3 +18,5 @@ Ainda é um projeto simples, porém estou em constante aprendizado!
 - [x] Ícone adicionado
 - [x] Nome do aplicativo alterado para "ProdStorage"
 - [x] Tema claro e escuro
+
+>- [x] Corrigido o bug da lista que sumia
