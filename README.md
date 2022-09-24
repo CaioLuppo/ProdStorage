@@ -1,6 +1,16 @@
-# ProdStorage <img src='assets/rounded.png' style="width:16%;" align="right">
+# ProdStorage
 
 O ProdStorage é um inventário de produtos feito em Flutter, onde o usuário pode adicionar um produto com nome, quantidade e valor!
+
+| :placard: Vitrine.Dev |     |
+| -------------  | --- |
+| :sparkles: Nome        | **ProdStorage**
+| :label: Tecnologias | Flutter
+| :rocket: URL         | -
+| :fire: Desafio     | -
+
+<!-- Inserir imagem com a #vitrinedev ao final do link -->
+<img src='assets/rounded.png#vitrinedev' style="width:16%;">
 
 ## Mudanças
 
