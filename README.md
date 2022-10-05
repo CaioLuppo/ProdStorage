@@ -2,16 +2,6 @@
 
 O ProdStorage é um inventário de produtos feito em Flutter, onde o usuário pode adicionar um produto com nome, quantidade e valor!
 
-| :placard: Vitrine.Dev |     |
-| -------------  | --- |
-| :sparkles: Nome        | **ProdStorage**
-| :label: Tecnologias | Flutter
-| :rocket: URL         | -
-| :fire: Desafio     | -
-
-<!-- Inserir imagem com a #vitrinedev ao final do link -->
-<img src='assets/rounded.png#vitrinedev' style="width:16%;">
-
 ## Mudanças
 
 A partir do <a href='https://www.alura.com.br/artigos/criando-formulario-com-flutter'>artigo</a> publicado pela Alura, fiz a criação de um <a href='https://github.com/CaioLuppo/InventariodeProdutos/releases/tag/FimDoArtigo'>app simples</a> onde apenas existiam inputs e o botão de confirmar.
